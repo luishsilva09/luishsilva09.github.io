@@ -522,3 +522,36 @@ dialog.zoom button { position: fixed; top: 16px; right: 16px; font: 500 0.9375re
 .contato-bloco .wordmark .lhs { color: #F2F4F7; }
 .contato-bloco .wordmark::after { background: #2DD4BF; }
 .rodape { display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; }
+
+/* ---------- cor de cada projeto, escolhida pelo tema sem JS ---------- */
+[style*="--p-escuro"] { --p: var(--p-escuro); }
+:root[data-theme="light"] [style*="--p-escuro"] { --p: var(--p-claro); }
+[hidden] { display: none !important; }
+
+/* imagens responsivas (<picture>) ocupam a moldura */
+.tela picture, .capa picture, .moldura picture, .cel picture, .vitrine picture { display: block; width: 100%; height: 100%; }
+.tela img, .capa img, .moldura img, .cel img, .vitrine img { width: 100%; height: 100%; object-fit: cover; }
+
+/* pular para o conteúdo: aparece só no foco por teclado */
+.pular {
+  position: absolute; left: 12px; top: -48px; z-index: 50;
+  padding: 10px 14px; border-radius: 10px; background: var(--accent); color: var(--accent-ink);
+  font-weight: 600; text-decoration: none; transition: top .15s;
+}
+.pular:focus { top: 12px; }
+main:focus { outline: none; }
+
+/* seletor de idioma */
+.idioma {
+  display: inline-grid; place-items: center; min-width: 36px; height: 36px; padding: 0 8px;
+  border: 1px solid var(--line); border-radius: 10px; background: var(--surface);
+  color: var(--ink-2); font: 600 .8125rem/1 var(--display); letter-spacing: .04em; text-decoration: none;
+}
+.idioma:hover { color: var(--accent-hover); border-color: var(--accent); }
+
+/* 404 */
+.nao-encontrado .codigo { font: 700 clamp(4rem, 14vw, 9rem)/1 var(--display); letter-spacing: -0.05em; color: var(--accent); margin-bottom: 12px; }
+.nao-encontrado h1 { font-size: var(--s4); margin-bottom: 12px; }
+.nao-encontrado .botoes { margin-top: 24px; }
+.nao-encontrado .outro-idioma { margin-top: 56px; padding-top: 32px; border-top: 1px solid var(--line); display: grid; gap: 12px; justify-items: start; }
+.nao-encontrado .outro-idioma h2 { font-size: var(--s2); }
