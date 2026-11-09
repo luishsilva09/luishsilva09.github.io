@@ -9,7 +9,7 @@ export default {
   linkedin: "https://www.linkedin.com/in/luishenriquesilva",
   curriculo: "/curriculo/Luis-Henrique-Silva-CV.pdf",
   // Token do Cloudflare Web Analytics (é público: aparece no HTML). Vazio = sem analytics.
-  analyticsToken: "",
+  analyticsToken: "c4a5fb75180e44febe95b9634291b6d5",
   // Prints usados na vitrine do topo da home: [slug, arquivo].
   vitrine: {
     atras: ["site-gs", "home.jpg"],
