@@ -1,26 +1,27 @@
 /* ---------- tokens ---------- */
 :root {
-  --bg: #f4f5f5;
-  --surface: #ffffff;
-  --surface-2: #eceeef;
-  --ink: #111315;
-  --ink-2: #4b5157;
-  --ink-3: #7d838a;
-  --line: #e0e3e5;
-  /* marca LH dev: menta do logo para preenchimentos, tom fechado para texto/botão no claro */
-  --marca: #2fdfac;
-  --marca-2: #1fe3bd;
-  --marca-tx: #0a7f60;
-  --navy: var(--marca-tx);
-  --accent: var(--marca-tx);
-  --p: var(--marca-tx);
-
-  /* elevação em 3 níveis: cartão, print, destaque */
-  --sombra-1: 0 1px 2px rgba(17, 19, 21, .05), 0 4px 12px -6px rgba(17, 19, 21, .12);
-  --sombra-2: 0 2px 4px rgba(17, 19, 21, .06), 0 18px 40px -18px rgba(17, 19, 21, .35);
-  --sombra-3: 0 4px 8px rgba(17, 19, 21, .08), 0 40px 80px -30px rgba(17, 19, 21, .5);
+  /* identidade devlhs — tema escuro é o padrão */
+  --bg: #080A0E;
+  --surface: #0E1116;
+  --surface-2: #151A22;   /* tile */
+  --line: #2A3342;
+  --ink: #F2F4F7;         /* text */
+  --muted: #8B96A5;
+  --ink-2: color-mix(in srgb, var(--ink) 40%, var(--muted));
+  --ink-3: var(--muted);
+  --accent: #2DD4BF;
+  --accent-hover: #5EEAD4;
+  --accent-ink: #080A0E;  /* texto sobre o teal */
+  --marca: var(--accent);
+  --marca-2: var(--accent-hover);
+  --navy: var(--accent);
+  --p: var(--accent);
+  --sombra-1: 0 1px 2px rgba(0, 0, 0, .45), 0 6px 16px -8px rgba(0, 0, 0, .65);
+  --sombra-2: 0 2px 4px rgba(0, 0, 0, .45), 0 22px 44px -18px rgba(0, 0, 0, .85);
+  --sombra-3: 0 4px 8px rgba(0, 0, 0, .5), 0 44px 90px -30px rgba(0, 0, 0, .95);
 
   --sans: "Schibsted Grotesk", system-ui, sans-serif;
+  --display: "Space Grotesk", var(--sans);
   --serif: "Newsreader", Georgia, serif;
 
   --s-1: 0.8125rem;
@@ -36,25 +37,24 @@
   --r-1: 12px;
   --r-2: 20px;
   --r-3: 28px;
-  color-scheme: light;
+  color-scheme: dark;
 }
 
-:root[data-theme="dark"] {
-  --bg: #0b0c0e;
-  --surface: #15171a;
-  --surface-2: #1e2125;
-  --ink: #f2f3f4;
-  --ink-2: #c3c7cc;
-  --ink-3: #8f959c;
-  --line: #262a2f;
-  --marca-tx: #3ee3b0;
-  --navy: var(--marca-tx);
-  --accent: var(--marca-tx);
-  --p: var(--marca-tx);
-  --sombra-1: 0 1px 2px rgba(0, 0, 0, .4), 0 6px 16px -8px rgba(0, 0, 0, .6);
-  --sombra-2: 0 2px 4px rgba(0, 0, 0, .4), 0 22px 44px -18px rgba(0, 0, 0, .8);
-  --sombra-3: 0 4px 8px rgba(0, 0, 0, .45), 0 44px 90px -30px rgba(0, 0, 0, .9);
-  color-scheme: dark;
+/* tema claro, opcional pelo botão */
+:root[data-theme="light"] {
+  --bg: #F4F5F7;
+  --surface: #FFFFFF;
+  --surface-2: #E9ECF0;
+  --line: #DCE0E6;
+  --ink: #0E1116;
+  --muted: #5B6573;
+  --accent: #0D9488;
+  --accent-hover: #0F766E;
+  --accent-ink: #FFFFFF;
+  --sombra-1: 0 1px 2px rgba(14, 17, 22, .05), 0 4px 12px -6px rgba(14, 17, 22, .12);
+  --sombra-2: 0 2px 4px rgba(14, 17, 22, .06), 0 18px 40px -18px rgba(14, 17, 22, .35);
+  --sombra-3: 0 4px 8px rgba(14, 17, 22, .08), 0 40px 80px -30px rgba(14, 17, 22, .5);
+  color-scheme: light;
 }
 
 /* tom do projeto misturado à superfície: usado em painéis e chips */
@@ -76,10 +76,11 @@ body {
 }
 img { max-width: 100%; display: block; }
 a { color: inherit; }
-h1, h2, h3 { margin: 0; line-height: 1.15; font-weight: 600; letter-spacing: -0.015em; }
+h1, h2, h3 { margin: 0; line-height: 1.15; font-family: var(--display); font-weight: 700; letter-spacing: -0.025em; }
 p { margin: 0; }
 code { font-size: .9em; padding: 1px 6px; border-radius: 6px; background: var(--surface-2); }
-:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 6px; }
+a:hover { color: var(--accent-hover); }
 
 .wrap { max-width: var(--max); margin: 0 auto; padding: 0 var(--gutter); }
 .small { font-size: var(--s-1); color: var(--ink-3); }
@@ -95,25 +96,33 @@ code { font-size: .9em; padding: 1px 6px; border-radius: 6px; background: var(--
 }
 .topo.rolou { border-bottom-color: var(--line); }
 .topo .wrap { display: flex; align-items: center; justify-content: space-between; height: 64px; gap: 16px; }
-.marca { display: inline-flex; align-items: center; gap: 10px; font-weight: 600; text-decoration: none; letter-spacing: -0.01em; }
-.marca img { width: 34px; height: auto; }
-:root:not([data-theme="dark"]) .marca img { filter: drop-shadow(0 1px 0 rgba(0,0,0,.08)); }
+.marca { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; }
+.marca img { width: 36px; height: 36px; }
+.wordmark { font-family: var(--display); font-size: 22px; letter-spacing: -0.03em; line-height: 1; white-space: nowrap; }
+.wordmark .dev { color: var(--muted); font-weight: 500; }
+.wordmark .lhs { color: var(--ink); font-weight: 700; }
+.wordmark::after {
+  /* cursor de terminal, apoiado na linha de base */
+  content: ""; display: inline-block; width: .45em; height: .14em; margin-left: .08em;
+  border-radius: 2px; background: var(--accent); vertical-align: baseline;
+}
+.marca:hover .wordmark .lhs { color: var(--ink); }
 .topo nav { display: flex; gap: clamp(12px, 3vw, 28px); font-size: 0.9375rem; }
 .topo nav a { text-decoration: none; color: var(--ink-2); }
-.topo nav a:hover { color: var(--ink); }
+.topo nav a:hover { color: var(--accent-hover); }
 .topo .direita { display: flex; align-items: center; gap: clamp(12px, 3vw, 28px); }
-@media (max-width: 560px) { .topo nav .opcional { display: none; } .marca span { display: none; } }
+@media (max-width: 560px) { .topo nav .opcional { display: none; } .wordmark { font-size: 19px; } }
 
 .tema {
   display: inline-grid; place-items: center; width: 36px; height: 36px;
   border: 1px solid var(--line); border-radius: 10px; background: var(--surface);
   color: var(--ink-2); cursor: pointer; padding: 0; box-shadow: var(--sombra-1);
 }
-.tema:hover { color: var(--ink); }
+.tema:hover { color: var(--accent-hover); border-color: var(--accent); }
 .tema svg { width: 18px; height: 18px; }
 .tema .lua { display: none; }
-:root[data-theme="dark"] .tema .sol { display: none; }
-:root[data-theme="dark"] .tema .lua { display: block; }
+:root:not([data-theme="light"]) .tema .sol { display: none; }
+:root:not([data-theme="light"]) .tema .lua { display: block; }
 
 /* ---------- botões ---------- */
 .botoes { display: flex; flex-wrap: wrap; gap: 10px; }
@@ -125,19 +134,21 @@ code { font-size: .9em; padding: 1px 6px; border-radius: 6px; background: var(--
   box-shadow: var(--sombra-1);
   transition: transform .15s, box-shadow .15s;
 }
-.btn:hover { transform: translateY(-1px); box-shadow: var(--sombra-2); }
-.btn.principal { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.btn:hover { transform: translateY(-1px); box-shadow: var(--sombra-2); border-color: var(--accent); }
+.btn.principal { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+.btn.principal:hover { background: var(--accent-hover); border-color: var(--accent-hover); color: var(--accent-ink); }
+:root[data-theme="light"] .btn.principal { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+:root[data-theme="light"] .btn.principal:hover { background: var(--accent-hover); border-color: var(--accent-hover); color: #fff; }
 .btn.cor { background: var(--p); border-color: var(--p); color: #fff; }
 
 /* ---------- hero ---------- */
 .hero { position: relative; isolation: isolate; }
 .hero::before {
-  /* luz de fundo: dá volume ao topo sem virar decoração */
+  /* luz de fundo discreta: dá volume sem virar bloco de cor */
   content: ""; position: absolute; inset: -64px 0 auto 0; height: 760px; z-index: -1;
   background:
-    radial-gradient(620px 400px at 78% 30%, color-mix(in srgb, var(--marca) 22%, transparent), transparent 70%),
-    radial-gradient(520px 360px at 98% 75%, color-mix(in srgb, var(--marca-2) 14%, transparent), transparent 70%),
-    radial-gradient(700px 420px at 5% 0%, color-mix(in srgb, var(--ink) 5%, transparent), transparent 70%);
+    radial-gradient(560px 360px at 80% 32%, color-mix(in srgb, var(--accent) 7%, transparent), transparent 70%),
+    radial-gradient(700px 420px at 5% 0%, color-mix(in srgb, var(--ink) 4%, transparent), transparent 70%);
 }
 .hero .wrap {
   display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
@@ -345,20 +356,18 @@ code { font-size: .9em; padding: 1px 6px; border-radius: 6px; background: var(--
 .contato-bloco {
   position: relative; overflow: hidden; isolation: isolate;
   border-radius: var(--r-3); padding: clamp(36px, 6vw, 72px);
-  background: #070809; color: #f3f4f6;
+  background: #151A22; color: #F2F4F7; border: 1px solid #2A3342;
 }
-:root[data-theme="dark"] .contato-bloco { background: #101215; border: 1px solid var(--line); }
 .contato-bloco::before {
   content: ""; position: absolute; inset: 0; z-index: -1;
-  background:
-    radial-gradient(520px 320px at 92% 0%, rgba(47, 223, 172, .30), transparent 70%),
-    radial-gradient(420px 260px at 0% 100%, rgba(31, 227, 189, .14), transparent 70%);
+  background: radial-gradient(420px 240px at 95% 0%, rgba(45, 212, 191, .10), transparent 70%);
 }
 .contato-bloco h2 { font-size: var(--s4); max-width: 18ch; letter-spacing: -0.03em; }
-.contato-bloco p { margin-top: 14px; color: #b9bfc5; max-width: 50ch; }
+.contato-bloco p { margin-top: 14px; color: #8B96A5; max-width: 50ch; }
 .contato-bloco .botoes { margin-top: 32px; }
 .contato-bloco .btn { background: rgba(255,255,255,.08); color: #fff; border-color: rgba(255,255,255,.18); box-shadow: none; }
-.contato-bloco .btn.principal { background: var(--marca); color: #070809; border-color: var(--marca); }
+.contato-bloco .btn.principal { background: #2DD4BF; color: #080A0E; border-color: #2DD4BF; }
+.contato-bloco .btn.principal:hover { background: #5EEAD4; border-color: #5EEAD4; }
 .rodape { padding: 32px 0 48px; color: var(--ink-3); font-size: var(--s-1); }
 
 /* ================= página de projeto ================= */
@@ -487,7 +496,7 @@ code { font-size: .9em; padding: 1px 6px; border-radius: 6px; background: var(--
 }
 .proximo:hover { transform: translateY(-3px); box-shadow: var(--sombra-2); }
 .proximo .small { display: block; margin-bottom: 6px; }
-.proximo b { font-size: var(--s3); font-weight: 600; letter-spacing: -0.025em; }
+.proximo b { font-family: var(--display); font-size: var(--s3); font-weight: 700; letter-spacing: -0.03em; }
 .proximo .seta { width: 48px; height: 48px; border-radius: 50%; display: grid; place-items: center; background: var(--p); color: #fff; flex: none; }
 .proximo .seta svg { width: 20px; height: 20px; }
 
@@ -496,21 +505,20 @@ dialog.zoom { border: 0; padding: 0; background: transparent; max-width: min(140
 dialog.zoom::backdrop { background: rgba(8, 12, 20, 0.86); }
 dialog.zoom img { max-width: 100%; max-height: 86vh; border-radius: 10px; margin: 0 auto; }
 dialog.zoom p { color: #e8ecf3; text-align: center; margin-top: 12px; font-size: 0.9375rem; }
-dialog.zoom button { position: fixed; top: 16px; right: 16px; font: 500 0.9375rem var(--sans); background: #fff; color: #14213a; border: 0; border-radius: 8px; padding: 8px 12px; cursor: pointer; }
+dialog.zoom button { position: fixed; top: 16px; right: 16px; font: 500 0.9375rem var(--sans); background: #F2F4F7; color: #0E1116; border: 0; border-radius: 8px; padding: 8px 12px; cursor: pointer; }
 
 /* no escuro a cor do projeto é clara: texto escuro por cima para manter contraste */
-:root[data-theme="dark"] .btn.cor,
-:root[data-theme="dark"] .projeto-linha .ver,
-:root[data-theme="dark"] .abas button[aria-selected="true"],
-:root[data-theme="dark"] .proximo .seta { color: #0f1418; }
+:root:not([data-theme="light"]) .btn.cor,
+:root:not([data-theme="light"]) .projeto-linha .ver,
+:root:not([data-theme="light"]) .abas button[aria-selected="true"],
+:root:not([data-theme="light"]) .proximo .seta { color: #080A0E; }
 
-/* assinatura LH dev */
-.assinatura { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; }
-.assinatura img { width: 40px; }
-.assinatura b { font-weight: 700; letter-spacing: .06em; font-size: 1.125rem; color: var(--ink); }
-.assinatura b span { font-weight: 400; letter-spacing: .02em; color: var(--ink-3); margin-left: .35em; }
+/* marca no rodapé e no contato */
+.assinatura { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; }
+.assinatura img { width: 32px; height: 32px; }
+.assinatura .wordmark { font-size: 19px; }
 .contato-bloco .assinatura { margin-bottom: 28px; }
-.contato-bloco .assinatura b { color: #fff; }
-.contato-bloco .assinatura b span { color: #a7adb3; }
+.contato-bloco .wordmark .dev { color: #8B96A5; }
+.contato-bloco .wordmark .lhs { color: #F2F4F7; }
+.contato-bloco .wordmark::after { background: #2DD4BF; }
 .rodape { display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; }
-.btn.principal { background: var(--ink); color: var(--bg); }

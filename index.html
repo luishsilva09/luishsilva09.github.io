@@ -2,24 +2,28 @@
 <html lang="pt-BR" data-raiz="">
 <head>
   <meta charset="utf-8">
-  <script>try{document.documentElement.dataset.theme=localStorage.getItem("tema")==="dark"?"dark":"light"}catch(e){document.documentElement.dataset.theme="light"}</script>
+  <script>try{document.documentElement.dataset.theme=localStorage.getItem("tema")==="light"?"light":"dark"}catch(e){document.documentElement.dataset.theme="dark"}</script>
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Luís Henrique Silva | Desenvolvedor Full Stack</title>
   <meta name="description" content="Portfólio de Luís Henrique Silva, desenvolvedor full stack: projetos do problema até produção, com Next.js, Python, PostgreSQL, Docker e CI/CD.">
   <meta property="og:title" content="Luís Henrique Silva | Desenvolvedor Full Stack">
   <meta property="og:description" content="Projetos do problema até produção: Next.js, Python, PostgreSQL, Docker, CI/CD e observabilidade.">
-  <meta property="og:image" content="assets/prints/site-gs/home.jpg">
-  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <meta property="og:image" content="https://luishsilva09.github.io/assets/og.png">
+  <meta property="og:url" content="https://luishsilva09.github.io/">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+  <meta name="theme-color" content="#080A0E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500&family=Schibsted+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500&family=Schibsted+Grotesk:wght@400;500;600&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
   <header class="topo">
     <div class="wrap">
-      <a class="marca" href="#"><img src="assets/logo.svg" alt="LH dev"><span>Luís Henrique Silva</span></a>
+      <a class="marca" href="./" aria-label="devlhs, página inicial"><img src="assets/logo-mark.svg" alt="" width="36" height="36"><span class="wordmark"><span class="dev">dev</span><span class="lhs">lhs</span></span></a>
       <div class="direita">
       <nav>
         <a href="#projetos">Projetos</a>
@@ -39,7 +43,7 @@
     <section class="hero">
       <div class="wrap">
         <div>
-          <p class="quem">Desenvolvedor full stack em São José dos Campos</p>
+          <p class="quem">Luís Henrique Silva, desenvolvedor full stack em São José dos Campos</p>
           <h1>Levo sistemas do problema até produção, e cuido deles depois.</h1>
           <p class="intro">Trabalho com Python e PostgreSQL na Nube. Fora dela, construo e mantenho sozinho os sistemas abaixo: um deles no ar para uma ONG, os outros em uso diário no meu homelab.</p>
           <div class="botoes">
@@ -184,7 +188,7 @@
     <section class="secao" id="contato">
       <div class="wrap">
         <div class="contato-bloco">
-          <span class="assinatura"><img src="assets/logo.svg" alt=""><b>LH<span>dev</span></b></span>
+          <span class="assinatura"><img src="assets/logo-mark.svg" alt="" width="32" height="32"><span class="wordmark"><span class="dev">dev</span><span class="lhs">lhs</span></span></span>
           <h2>Quer conversar sobre um projeto ou uma vaga?</h2>
           <p>Respondo por e-mail ou LinkedIn. O currículo completo está em PDF.</p>
           <div class="botoes">
@@ -198,7 +202,7 @@
     </section>
   </main>
 
-  <footer class="rodape wrap"><a class="assinatura" href="#"><img src="assets/logo.svg" alt=""><b>LH<span>dev</span></b></a><span>Feito à mão, publicado no GitHub Pages.</span></footer>
+  <footer class="rodape wrap"><a class="assinatura" href="./"><img src="assets/logo-mark.svg" alt="" width="32" height="32"><span class="wordmark"><span class="dev">dev</span><span class="lhs">lhs</span></span></a><span>Feito à mão, publicado no GitHub Pages.</span></footer>
 
   <script src="assets/projetos.js"></script>
   <script src="assets/app.js"></script>
