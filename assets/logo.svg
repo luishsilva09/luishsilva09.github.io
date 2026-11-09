@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 62" fill="none">
+  <defs>
+    <linearGradient id="lh" x1="0" y1="0" x2="100" y2="62" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#3ddca4"/>
+      <stop offset="1" stop-color="#1fe3bd"/>
+    </linearGradient>
+  </defs>
+  <!-- L: haste com topo em diagonal, base terminando em bisel -->
+  <path d="M0 12.4 L12.4 0 V48.7 H62.9 L48.8 61.8 H1 Q0 61.8 0 60.8 Z" fill="url(#lh)"/>
+  <!-- H: barra inclinada à esquerda + haste com corte diagonal embaixo -->
+  <path d="M50.5 26.5 H87 V39.5 H36.4 Z" fill="url(#lh)"/>
+  <path d="M87 6.3 Q87 5.3 88 5.3 H99 Q100 5.3 100 6.3 V54.7 L87 61.8 Z" fill="url(#lh)"/>
+</svg>
