@@ -60,7 +60,7 @@ export default {
   },
   home: {
     quem: "Luís Henrique Silva, desenvolvedor full stack em São José dos Campos",
-    titulo: "Levo sistemas do problema até produção, e cuido deles depois.",
+    titulo: "Desenvolvedor full stack: construo sistemas do zero à produção e os mantenho no ar.",
     intro: "Trabalho com Python e PostgreSQL na Nube. Fora dela, construo e mantenho sozinho os sistemas abaixo: um deles no ar para uma ONG, os outros em uso diário no meu homelab.",
     esteiraAria: "Etapas que cubro em cada projeto",
     esteira: [

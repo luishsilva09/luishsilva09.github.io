@@ -53,7 +53,7 @@ export default {
   },
   home: {
     quem: "Luís Henrique Silva, full stack developer in São José dos Campos, Brazil",
-    titulo: "I take systems from problem to production, and look after them afterwards.",
+    titulo: "Full stack developer: I build systems from scratch to production and keep them running.",
     intro: "I work with Python and PostgreSQL at Nube. Outside of it, I build and maintain the systems below on my own: one is live for a nonprofit, the others are in daily use on my homelab.",
     esteiraAria: "Stages I cover in every project",
     esteira: [
