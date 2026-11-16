@@ -78,6 +78,9 @@ export default {
     ],
     projetosTitulo: "Projects",
     projetosSub: "Almost all of the repositories are private. Each page covers the problem, how I solved it, the screens and the technical decisions that mattered most.",
+    servicosTitulo: "What you can hire me for",
+    servicosSub: "If your business needs something like this, I take it from first idea to going live.",
+    servicosBotao: "See services and get a quote",
     infraTitulo: "Behind the projects",
     infraSub: "The part you don't see on screen, but that keeps everything running.",
     infra: [

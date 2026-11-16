@@ -317,6 +317,32 @@ a:hover { color: var(--accent-hover); }
 .infra h3 { font-size: 1.0625rem; }
 .infra p { color: var(--ink-2); font-size: .9688rem; }
 
+/* ---------- serviços na home ---------- */
+.servicos-home { display: grid; grid-template-columns: 1fr; gap: 16px; }
+.servicos-home > div {
+  background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-2); box-shadow: var(--sombra-1);
+  padding: 24px; display: grid; gap: 8px; align-content: start;
+}
+.servicos-home .ico {
+  width: 40px; height: 40px; border-radius: 11px; display: grid; place-items: center; margin-bottom: 8px;
+  background: var(--ink); color: var(--bg);
+}
+.servicos-home .ico svg { width: 20px; height: 20px; }
+.servicos-home h3 { font-size: 1.0625rem; }
+.servicos-home p { color: var(--ink-2); font-size: .9688rem; }
+.servicos-home-cta { margin-top: 32px; }
+/* 5 cartões sem órfão: 2 colunas com o último na largura toda; 3 + 2 centralizado em telas largas */
+@media (min-width: 620px) {
+  .servicos-home { grid-template-columns: repeat(6, 1fr); }
+  .servicos-home > div { grid-column: span 3; }
+  .servicos-home > div:last-child:nth-child(odd) { grid-column: span 6; }
+}
+@media (min-width: 980px) {
+  .servicos-home > div { grid-column: span 2; }
+  .servicos-home > div:last-child:nth-child(odd) { grid-column: span 2; }
+  .servicos-home > div:nth-child(4) { grid-column: 2 / span 2; }
+}
+
 /* ---------- experiência ---------- */
 .linha-tempo { list-style: none; margin: 0; padding: 0; display: grid; }
 .linha-tempo > li {

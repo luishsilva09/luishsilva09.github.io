@@ -103,7 +103,7 @@ ${cabecalho(c, alternativo)}
   <main id="conteudo" tabindex="-1">
 ${corpo}
   </main>
-  <footer class="rodape wrap"><a class="assinatura" href="${rotaHome(c.lang)}" aria-label="${esc(c.ui.marcaAria)}"><img src="/assets/logo-mark.svg" alt="" width="32" height="32">${wordmark}</a><span>${esc(c.ui.rodape)}</span></footer>
+  <footer class="rodape wrap"><a class="assinatura" href="${rotaHome(c.lang)}" aria-label="${esc(c.ui.marcaAria)}"><img src="/assets/logo-mark.svg" alt="" width="32" height="32">${wordmark}</a><span>${esc(c.ui.rodape)}${site.cnpj ? ` · CNPJ ${esc(site.cnpj)}` : ""}</span></footer>
   <script src="/assets/app.js" defer></script>
 </body>
 </html>
@@ -197,6 +197,23 @@ export function home({ c, site, img }) {
         </div>
         <div class="projetos">${projetos}
         </div>
+      </div>
+    </section>
+
+    <section class="secao" aria-labelledby="t-servicos-home">
+      <div class="wrap">
+        <div class="cabeca">
+          <h2 id="t-servicos-home">${esc(h.servicosTitulo)}</h2>
+          <p class="sub">${esc(h.servicosSub)}</p>
+        </div>
+        <div class="servicos-home">
+          ${c.servicos.lista.map((x) => `<div>
+            <span class="ico">${ICONES[x.icone]}</span>
+            <h3>${esc(x.titulo)}</h3>
+            <p>${esc(x.texto)}</p>
+          </div>`).join("\n          ")}
+        </div>
+        <p class="servicos-home-cta"><a class="btn principal" href="${rotaServicos(c.lang)}">${esc(h.servicosBotao)}</a></p>
       </div>
     </section>
 

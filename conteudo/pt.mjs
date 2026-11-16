@@ -85,6 +85,9 @@ export default {
     ],
     projetosTitulo: "Projetos",
     projetosSub: "Quase todos os repositórios são privados. Cada página conta o problema, como resolvi, as telas e as decisões técnicas que mais pesaram.",
+    servicosTitulo: "O que você pode contratar",
+    servicosSub: "Se você precisa de algo parecido para o seu negócio, eu faço do começo ao fim.",
+    servicosBotao: "Ver serviços e pedir orçamento",
     infraTitulo: "Por trás dos projetos",
     infraSub: "A parte que não aparece nas telas, mas é o que mantém tudo no ar.",
     infra: [
