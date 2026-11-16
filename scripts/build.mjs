@@ -4,7 +4,7 @@
  *   npm run dev     gera e serve em http://localhost:8080
  *
  * O que ele faz:
- * - páginas em HTML completo (pt e en), com título, descrição, imagem de
+ * - páginas em HTML completo (pt e en: home, serviços e projetos), com título, descrição, imagem de
  *   compartilhamento, canônica e hreflang próprios de cada página;
  * - versões WebP de cada print em vários tamanhos (o navegador escolhe pelo
  *   tamanho de tela) e uma imagem de compartilhamento 1200x630 por projeto;
@@ -20,7 +20,7 @@ import sharp from "sharp";
 import pt from "../conteudo/pt.mjs";
 import en from "../conteudo/en.mjs";
 import site from "../conteudo/site.mjs";
-import { esc, home, layout, naoEncontrado, projeto, rotaHome, rotaProjeto, capaDe } from "./paginas.mjs";
+import { esc, home, layout, naoEncontrado, projeto, servicos, rotaHome, rotaProjeto, rotaServicos, capaDe } from "./paginas.mjs";
 
 const RAIZ = join(dirname(fileURLToPath(import.meta.url)), "..");
 const SAIDA = join(RAIZ, "_site");
@@ -32,6 +32,10 @@ function validar() {
   const erros = [];
   const chave = (c) => c.projetos.map((p) => `${p.slug}:${p.prints.map((x) => x.arquivo).join(",")}`).join("|");
   if (chave(pt) !== chave(en)) erros.push("conteudo/pt.mjs e conteudo/en.mjs precisam ter os mesmos projetos e prints, na mesma ordem.");
+  const servs = (c) => c.servicos.lista.map((x) => `${x.icone}:${x.exemplo.slug || ""}`).join("|");
+  if (servs(pt) !== servs(en)) erros.push("\"servicos.lista\" em conteudo/pt.mjs e conteudo/en.mjs precisa ter os mesmos serviços, na mesma ordem.");
+  for (const x of pt.servicos.lista)
+    if (x.exemplo.slug && !pt.projetos.some((p) => p.slug === x.exemplo.slug)) erros.push(`serviço "${x.titulo}" aponta para um projeto que não existe: ${x.exemplo.slug}`);
   for (const p of pt.projetos)
     for (const x of p.prints)
       if (!existsSync(join(RAIZ, "assets/prints", p.slug, x.arquivo))) erros.push(`print não encontrado: assets/prints/${p.slug}/${x.arquivo}`);
@@ -138,6 +142,43 @@ async function gerarIdioma(c, outro) {
     jsonld: { "@context": "https://schema.org", "@graph": [pessoa(c), { "@type": "WebSite", name: "devlhs", url: site.dominio + "/", inLanguage: c.lang, author: { "@id": `${site.dominio}/#luis` } }] },
     corpo: home({ c, site, img }),
   }));
+  // serviços
+  const s = c.servicos;
+  await escrever(rotaServicos(c.lang), layout({
+    c, site,
+    titulo: s.meta.titulo,
+    descricao: s.meta.descricao,
+    caminho: rotaServicos(c.lang),
+    alternativo: rotaServicos(outro.lang),
+    ogImagem: "/assets/og.png",
+    jsonld: {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "ProfessionalService",
+          "@id": `${site.dominio}/#servicos`,
+          name: "devlhs",
+          description: s.meta.descricao,
+          url: site.dominio + rotaServicos(c.lang),
+          image: `${site.dominio}/assets/og.png`,
+          telephone: `+${site.whatsapp}`,
+          email: `mailto:${site.email}`,
+          address: { "@type": "PostalAddress", addressLocality: c.perfil.cidade, addressRegion: c.perfil.regiao, addressCountry: c.perfil.pais },
+          areaServed: [{ "@type": "City", name: c.perfil.cidade }, { "@type": "AdministrativeArea", name: "Vale do Paraíba" }, { "@type": "Country", name: "Brasil" }],
+          sameAs: [site.linkedin, site.github],
+          founder: { "@id": `${site.dominio}/#luis` },
+          hasOfferCatalog: { "@type": "OfferCatalog", name: s.listaTitulo, itemListElement: s.lista.map((x) => ({ "@type": "Offer", itemOffered: { "@type": "Service", name: x.titulo, description: x.texto } })) },
+        },
+        { "@type": "BreadcrumbList", itemListElement: [
+          { "@type": "ListItem", position: 1, name: c.perfil.nome, item: site.dominio + rotaHome(c.lang) },
+          { "@type": "ListItem", position: 2, name: s.migalha, item: site.dominio + rotaServicos(c.lang) },
+        ] },
+        { "@type": "FAQPage", mainEntity: s.faq.map(([q, r]) => ({ "@type": "Question", name: q, acceptedAnswer: { "@type": "Answer", text: r } })) },
+        pessoa(c),
+      ],
+    },
+    corpo: servicos({ c, site }),
+  }));
   // projetos
   for (const [i, p] of c.projetos.entries()) {
     const prox = c.projetos[(i + 1) % c.projetos.length];
@@ -161,14 +202,14 @@ async function gerarIdioma(c, outro) {
           { ...pessoa(c), "@type": "Person" },
         ],
       },
-      corpo: projeto({ c, p, prox, img, maior }),
+      corpo: projeto({ c, site, p, prox, img, maior }),
     }));
   }
 }
 
 function sitemap() {
   const hoje = new Date().toISOString().slice(0, 10);
-  const pares = [[rotaHome("pt"), rotaHome("en")], ...pt.projetos.map((p) => [rotaProjeto("pt", p.slug), rotaProjeto("en", p.slug)])];
+  const pares = [[rotaHome("pt"), rotaHome("en")], [rotaServicos("pt"), rotaServicos("en")], ...pt.projetos.map((p) => [rotaProjeto("pt", p.slug), rotaProjeto("en", p.slug)])];
   const url = (loc, a, b) => `  <url>
     <loc>${site.dominio}${loc}</loc>
     <lastmod>${hoje}</lastmod>
@@ -211,5 +252,5 @@ await writeFile(join(SAIDA, "404.html"), layout({
 await writeFile(join(SAIDA, "sitemap.xml"), sitemap());
 await writeFile(join(SAIDA, "robots.txt"), `User-agent: *\nAllow: /\n\nSitemap: ${site.dominio}/sitemap.xml\n`);
 
-const paginas = 2 * (1 + pt.projetos.length);
+const paginas = 2 * (2 + pt.projetos.length);
 console.log(`Site gerado em _site/: ${paginas} páginas, ${imagens.size} imagens, em ${((Date.now() - inicio) / 1000).toFixed(1)}s.`);

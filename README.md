@@ -15,7 +15,8 @@ npm run dev        # gera em _site/ e serve em http://localhost:8080
 |---|---|
 | Textos, projetos e legendas dos prints (português) | `conteudo/pt.mjs` |
 | O mesmo em inglês (mesmos projetos e prints, na mesma ordem) | `conteudo/en.mjs` |
-| E-mail, redes, currículo, token do analytics, prints da vitrine | `conteudo/site.mjs` |
+| Página de serviços (`/servicos/` e `/en/services/`) | chave `servicos` em `conteudo/pt.mjs` e `conteudo/en.mjs` |
+| E-mail, WhatsApp, redes, currículo, token do analytics, prints da vitrine | `conteudo/site.mjs` |
 | Prints originais (JPG/PNG) | `assets/prints/<slug>/` |
 | Visual | `assets/style.css` |
 | Interações (tema, abas, zoom) | `assets/app.js` |

@@ -3,11 +3,15 @@
  * completo: o site funciona e é lido por buscadores e prévias de link sem JS.
  */
 
+import { createHash } from "node:crypto";
+
 export const esc = (s) =>
   String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]);
 
 /* ---------- rotas ---------- */
 export const rotaHome = (lang) => (lang === "en" ? "/en/" : "/");
+export const rotaServicos = (lang) => (lang === "en" ? "/en/services/" : "/servicos/");
+export const linkWhats = (site, texto) => `https://wa.me/${site.whatsapp}?text=${encodeURIComponent(texto)}`;
 export const rotaProjeto = (lang, slug) => (lang === "en" ? `/en/projects/${slug}/` : `/projetos/${slug}/`);
 
 /* ---------- ícones ---------- */
@@ -17,6 +21,10 @@ const ICONES = {
   grafico: svg('<path d="M3 3v18h18"/><path d="M7 14l4-4 3 3 5-6"/>'),
   servidor: svg('<rect x="3" y="4" width="18" height="7" rx="1.5"/><rect x="3" y="13" width="18" height="7" rx="1.5"/><path d="M7 7.5h.01M7 16.5h.01"/>'),
   documento: svg('<path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M8 13h8M8 17h5"/>'),
+  site: svg('<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/>'),
+  sistema: svg('<rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M9 9v11"/>'),
+  automacao: svg('<path d="M13 2L4 14h7l-1 8 9-12h-7z"/>'),
+  manutencao: svg('<path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>'),
   seta: svg('<path d="M5 12h14M13 6l6 6-6 6"/>'),
   voltar: svg('<path d="M19 12H5M11 6l-6 6 6 6"/>'),
   problema: svg('<circle cx="12" cy="12" r="9"/><path d="M12 8v4M12 16h.01"/>'),
@@ -27,6 +35,26 @@ const ICONES = {
 
 const wordmark = '<span class="wordmark"><span class="dev">dev</span><span class="lhs">lhs</span></span>';
 const corProjeto = (p) => `--p-claro:${p.corClara};--p-escuro:${p.corEscura}`;
+
+/* ---------- política de segurança de conteúdo ----------
+ * O GitHub Pages não deixa configurar cabeçalhos HTTP, então a CSP vai em
+ * <meta>. Só carrega o que é do próprio site, as fontes do Google e o
+ * analytics da Cloudflare. O único script embutido (o que aplica o tema antes
+ * de pintar a página) é liberado pelo hash, calculado aqui a cada build.
+ * Ao incluir um recurso de outro domínio, libere-o aqui também.
+ */
+const SCRIPT_TEMA = 'try{document.documentElement.dataset.theme=localStorage.getItem("tema")==="light"?"light":"dark"}catch(e){document.documentElement.dataset.theme="dark"}';
+const CSP = [
+  "default-src 'self'",
+  `script-src 'self' 'sha256-${createHash("sha256").update(SCRIPT_TEMA).digest("base64")}' https://static.cloudflareinsights.com`,
+  "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
+  "font-src https://fonts.gstatic.com",
+  "img-src 'self' data:",
+  "connect-src https://cloudflareinsights.com",
+  "object-src 'none'",
+  "base-uri 'self'",
+  "form-action 'self'",
+].join("; ");
 
 /* ---------- layout ---------- */
 export function layout({ c, site, titulo, descricao, caminho, alternativo, ogImagem, jsonld, corpo, classeBody = "", estiloBody = "" }) {
@@ -40,7 +68,8 @@ export function layout({ c, site, titulo, descricao, caminho, alternativo, ogIma
 <html lang="${c.lang}">
 <head>
   <meta charset="utf-8">
-  <script>try{document.documentElement.dataset.theme=localStorage.getItem("tema")==="light"?"light":"dark"}catch(e){document.documentElement.dataset.theme="dark"}</script>
+  <meta http-equiv="Content-Security-Policy" content="${CSP}">
+  <script>${SCRIPT_TEMA}</script>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>${esc(titulo)}</title>
   <meta name="description" content="${esc(descricao)}">
@@ -89,7 +118,8 @@ function cabecalho(c, alternativo) {
       <a class="marca" href="${casa}" aria-label="${esc(c.ui.marcaAria)}"><img src="/assets/logo-mark.svg" alt="" width="36" height="36">${wordmark}</a>
       <div class="direita">
         <nav aria-label="${c.lang === "en" ? "Main" : "Principal"}">
-          <a href="${casa}#${id.projetos}">${esc(n.projetos)}</a>
+          <a class="opcional" href="${casa}#${id.projetos}">${esc(n.projetos)}</a>
+          <a href="${rotaServicos(c.lang)}">${esc(n.servicos)}</a>
           <a class="opcional" href="${casa}#${id.infra}">${esc(n.infra)}</a>
           <a class="opcional" href="${casa}#${id.experiencia}">${esc(n.experiencia)}</a>
           <a href="${casa}#${id.contato}">${esc(n.contato)}</a>
@@ -106,6 +136,7 @@ export function home({ c, site, img }) {
   const h = c.home, id = c.ui.ids, v = site.vitrine;
   const contatoBotoes = `
             <a class="btn principal" href="mailto:${site.email}">${esc(site.email)}</a>
+            <a class="btn" href="${esc(linkWhats(site, c.ui.mensagemWhats))}" target="_blank" rel="noopener">${esc(c.ui.whats)}</a>
             <a class="btn" href="${site.linkedin}" target="_blank" rel="noopener">LinkedIn</a>
             <a class="btn" href="${site.github}" target="_blank" rel="noopener">GitHub</a>
             <a class="btn" href="${site.curriculo}" download>${esc(c.ui.cvCurto)}</a>`;
@@ -138,6 +169,7 @@ export function home({ c, site, img }) {
           <p class="intro">${esc(h.intro)}</p>
           <div class="botoes">
             <a class="btn principal" href="#${id.projetos}">${esc(c.ui.verProjetos)}</a>
+            <a class="btn" href="${rotaServicos(c.lang)}">${esc(c.ui.precisoDe)}</a>
             <a class="btn" href="${site.curriculo}" download>${esc(c.ui.baixarCV)}</a>
           </div>
         </div>
@@ -234,7 +266,7 @@ export function home({ c, site, img }) {
 export const capaDe = (p) => p.prints.find((x) => x.formato === "desktop" && x.area === "app") || p.prints[0];
 export const celularDe = (p) => p.prints.find((x) => x.formato === "mobile" && x.area === "app");
 
-export function projeto({ c, p, prox, img, maior }) {
+export function projeto({ c, site: cfg, p, prox, img, maior }) {
   const u = c.ui, capa = capaDe(p), cel = celularDe(p);
   const temAdmin = p.prints.some((x) => x.area === "admin");
   const site = Boolean(p.link);
@@ -287,7 +319,7 @@ export function projeto({ c, p, prox, img, maior }) {
     <section class="secao faixa" aria-labelledby="t-telas">
       <div class="wrap">
         <h2 id="t-telas">${esc(u.comoFicou)}</h2>
-        <p class="sub">${esc(site ? u.comoFicouLink : u.comoFicouPrivado)}</p>
+        <p class="sub">${esc(!site ? u.comoFicouPrivado : temAdmin ? u.comoFicouLink : u.comoFicouSite)}</p>
         ${galeria}
       </div>
     </section>
@@ -317,6 +349,16 @@ export function projeto({ c, p, prox, img, maior }) {
 
     <section class="secao">
       <div class="wrap">
+        <div class="chamada">
+          <div>
+            <h2>${esc(u.chamada.titulo)}</h2>
+            <p>${esc(u.chamada.texto)}</p>
+          </div>
+          <div class="botoes">
+            <a class="btn principal" href="${esc(linkWhats(cfg, u.chamada.mensagem.replace("{projeto}", p.nome)))}" target="_blank" rel="noopener">${esc(u.chamada.whats)}</a>
+            <a class="btn" href="${rotaServicos(c.lang)}">${esc(u.chamada.servicos)}</a>
+          </div>
+        </div>
         <a class="proximo" href="${rotaProjeto(c.lang, prox.slug)}" style="${corProjeto(prox)}">
           <span><span class="small">${esc(u.proximo)}</span><b>${esc(prox.nome)}</b></span>
           <span class="seta">${ICONES.seta}</span>
@@ -329,6 +371,76 @@ export function projeto({ c, p, prox, img, maior }) {
       <img alt="">
       <p></p>
     </dialog>`;
+}
+
+/* ---------- serviços ---------- */
+export function servicos({ c, site }) {
+  const s = c.servicos;
+  const whats = (msg) => esc(linkWhats(site, msg));
+  const botoes = `
+            <a class="btn principal" href="${whats(s.mensagem)}" target="_blank" rel="noopener">${esc(s.whats)}</a>
+            <a class="btn" href="mailto:${site.email}">${esc(s.email)}</a>`;
+  const cartao = (x) => `
+          <article id="${x.icone}">
+            <span class="ico">${ICONES[x.icone]}</span>
+            <h3>${esc(x.titulo)}</h3>
+            <p>${esc(x.texto)}</p>
+            <ul>
+              ${x.itens.map((t) => `<li>${esc(t)}</li>`).join("\n              ")}
+            </ul>
+            <p class="exemplo">${esc(s.exemplo)}: ${x.exemplo.slug ? `<a href="${rotaProjeto(c.lang, x.exemplo.slug)}">${esc(x.exemplo.texto)}</a>` : esc(x.exemplo.texto)}.</p>
+            <a class="pedir" href="${whats(s.mensagemServico.replace("{servico}", x.titulo))}" target="_blank" rel="noopener">${esc(s.pedir)} ${ICONES.seta}</a>
+          </article>`;
+
+  return `    <section class="serv-topo">
+      <div class="wrap">
+        <p class="quem">${esc(s.quem)}</p>
+        <h1>${esc(s.titulo)}</h1>
+        <p class="intro">${esc(s.intro)}</p>
+        <div class="botoes">${botoes}
+        </div>
+      </div>
+    </section>
+
+    <section class="secao" aria-labelledby="t-servicos">
+      <div class="wrap">
+        <h2 id="t-servicos">${esc(s.listaTitulo)}</h2>
+        <p class="sub">${esc(s.listaSub)}</p>
+        <div class="servicos">${s.lista.map(cartao).join("")}
+        </div>
+      </div>
+    </section>
+
+    <section class="secao faixa" aria-labelledby="t-como">
+      <div class="wrap">
+        <h2 id="t-como">${esc(s.comoTitulo)}</h2>
+        <p class="sub">${esc(s.comoSub)}</p>
+        <ol class="passos">
+          ${s.como.map(([t, d]) => `<li><b>${esc(t)}</b><span>${esc(d)}</span></li>`).join("\n          ")}
+        </ol>
+      </div>
+    </section>
+
+    <section class="secao" aria-labelledby="t-faq">
+      <div class="wrap">
+        <h2 id="t-faq" style="margin-bottom:28px">${esc(s.faqTitulo)}</h2>
+        <div class="faq">
+          ${s.faq.map(([q, r]) => `<details><summary>${esc(q)}</summary><p>${esc(r)}</p></details>`).join("\n          ")}
+        </div>
+      </div>
+    </section>
+
+    <section class="secao" style="padding-top:0" aria-labelledby="t-contato">
+      <div class="wrap">
+        <div class="contato-bloco">
+          <span class="assinatura"><img src="/assets/logo-mark.svg" alt="" width="32" height="32">${wordmark}</span>
+          <h2 id="t-contato">${esc(s.contatoTitulo)}</h2>
+          <p>${esc(s.contatoTexto)}</p>
+          <div class="botoes">${botoes}
+          </div>
+        </div>
+      </div>
+    </section>`;
 }
 
 /* ---------- 404 ---------- */
