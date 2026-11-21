@@ -57,7 +57,7 @@ const CSP = [
 ].join("; ");
 
 /* ---------- layout ---------- */
-export function layout({ c, site, titulo, descricao, caminho, alternativo, ogImagem, jsonld, corpo, classeBody = "", estiloBody = "" }) {
+export function layout({ c, site, titulo, descricao, caminho, alternativo, ogImagem, jsonld, corpo, classeBody = "", estiloBody = "", indexar = true }) {
   const url = site.dominio + caminho;
   const urlPt = site.dominio + (c.lang === "en" ? alternativo : caminho);
   const urlEn = site.dominio + (c.lang === "en" ? caminho : alternativo);
@@ -73,6 +73,8 @@ export function layout({ c, site, titulo, descricao, caminho, alternativo, ogIma
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>${esc(titulo)}</title>
   <meta name="description" content="${esc(descricao)}">
+  <meta name="author" content="${esc(c.perfil.nome)}">
+  <meta name="robots" content="${indexar ? "index, follow, max-image-preview:large, max-snippet:-1" : "noindex"}">
   <link rel="canonical" href="${url}">
   <link rel="alternate" hreflang="pt-BR" href="${urlPt}">
   <link rel="alternate" hreflang="en" href="${urlEn}">
@@ -85,9 +87,12 @@ export function layout({ c, site, titulo, descricao, caminho, alternativo, ogIma
   <meta property="og:image" content="${site.dominio}${ogImagem}">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="${esc(titulo)}">
   <meta property="og:locale" content="${c.lang === "en" ? "en_US" : "pt_BR"}">
   <meta property="og:locale:alternate" content="${c.lang === "en" ? "pt_BR" : "en_US"}">
   <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="${esc(titulo)}">
+  <meta name="twitter:description" content="${esc(descricao)}">
   <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
   <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
   <meta name="theme-color" content="#080A0E">

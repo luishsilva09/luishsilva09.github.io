@@ -13,8 +13,8 @@ export default {
   lang: "pt-BR",
   base: "/",
   meta: {
-    titulo: "Luís Henrique Silva | Desenvolvedor Full Stack",
-    descricao: "Portfólio de Luís Henrique Silva, desenvolvedor full stack: projetos do problema até produção, com Next.js, Python, PostgreSQL, Docker e CI/CD.",
+    titulo: "Luís Henrique Silva | Desenvolvedor Full Stack em São José dos Campos",
+    descricao: "Luís Henrique Silva (devlhs), desenvolvedor full stack em São José dos Campos, SP. Sites e sistemas web do problema até produção com Next.js, Python, PostgreSQL, Docker e CI/CD.",
   },
   ui: {
     pular: "Pular para o conteúdo",
@@ -98,7 +98,7 @@ export default {
     ],
     experienciaTitulo: "Experiência",
     experiencia: [
-      { atual: true, quando: "jun 2025 — atual", cargo: "Desenvolvedor Full Stack Júnior", onde: "Nube", itens: [
+      { atual: true, quando: "jun 2025 — atual", cargo: "Desenvolvedor Full Stack", onde: "Nube", itens: [
         "Desenvolvo e mantenho módulos web em Python e Zope de uso intensivo por usuários internos.",
         "Escrevo e otimizo queries em PostgreSQL, reduzindo o tempo de resposta de consultas críticas.",
         "Refatoro sistemas legados e regras de negócio em time Scrum.",
@@ -108,7 +108,7 @@ export default {
         "Mantenho a infraestrutura: Docker em VPS, Nginx com TLS e CSP, Cloudflare, deploy contínuo e monitoramento.",
       ] },
       { quando: "jan 2024 — jun 2025", cargo: "Estagiário de Desenvolvimento Full Stack", onde: "Nube", itens: [
-        "Implementei funcionalidades da análise de requisitos à modelagem em PostgreSQL. Efetivado como júnior.",
+        "Implementei funcionalidades da análise de requisitos à modelagem em PostgreSQL. Efetivado como desenvolvedor.",
       ] },
       { quando: "jan 2019 — jan 2024", cargo: "Operador de Produção Especializado", onde: "Johnson & Johnson", itens: [
         "De aprendiz a operador especializado em ambiente industrial regulado, com procedimentos padronizados.",

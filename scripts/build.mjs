@@ -113,14 +113,21 @@ const pessoa = (c) => ({
   "@type": "Person",
   "@id": `${site.dominio}/#luis`,
   name: c.perfil.nome,
+  alternateName: ["Luís Henrique", "Luis Henrique Silva", "devlhs"],
+  givenName: "Luís Henrique",
+  familyName: "Silva",
+  description: c.meta.descricao,
   jobTitle: c.perfil.cargo,
+  hasOccupation: { "@type": "Occupation", name: c.perfil.cargo, occupationLocation: { "@type": "City", name: c.perfil.cidade } },
   url: site.dominio + "/",
   image: `${site.dominio}/assets/og.png`,
   email: `mailto:${site.email}`,
   address: { "@type": "PostalAddress", addressLocality: c.perfil.cidade, addressRegion: c.perfil.regiao, addressCountry: c.perfil.pais },
   worksFor: { "@type": "Organization", name: "Nube" },
+  alumniOf: [{ "@type": "CollegeOrUniversity", name: "Anhanguera Educacional" }, { "@type": "Organization", name: "Driven Education" }],
+  knowsLanguage: ["pt-BR", "en"],
   sameAs: [site.github, site.linkedin],
-  knowsAbout: ["Python", "TypeScript", "Next.js", "React", "PostgreSQL", "Docker", "GitHub Actions", "Prometheus", "Grafana"],
+  knowsAbout: ["Python", "FastAPI", "TypeScript", "Next.js", "React", "Node.js", "PostgreSQL", "Redis", "Docker", "CI/CD", "GitHub Actions", "Linux", "Nginx", "Prometheus", "Grafana"],
 });
 
 /* ---------- escrita ---------- */
@@ -139,7 +146,11 @@ async function gerarIdioma(c, outro) {
     caminho: rotaHome(c.lang),
     alternativo: rotaHome(outro.lang),
     ogImagem: "/assets/og.png",
-    jsonld: { "@context": "https://schema.org", "@graph": [pessoa(c), { "@type": "WebSite", name: "devlhs", url: site.dominio + "/", inLanguage: c.lang, author: { "@id": `${site.dominio}/#luis` } }] },
+    jsonld: { "@context": "https://schema.org", "@graph": [
+      { "@type": "ProfilePage", url: site.dominio + rotaHome(c.lang), name: c.meta.titulo, inLanguage: c.lang, dateModified: new Date().toISOString().slice(0, 10), mainEntity: { "@id": `${site.dominio}/#luis` } },
+      pessoa(c),
+      { "@type": "WebSite", "@id": `${site.dominio}/#site`, name: "devlhs", alternateName: ["devlhs.com.br", c.perfil.nome], url: site.dominio + "/", inLanguage: c.lang, author: { "@id": `${site.dominio}/#luis` } },
+    ] },
     corpo: home({ c, site, img }),
   }));
   // serviços
@@ -248,7 +259,8 @@ await writeFile(join(SAIDA, "404.html"), layout({
   ogImagem: "/assets/og.png",
   jsonld: { "@context": "https://schema.org", "@type": "WebPage", name: pt.ui.naoEncontrado.titulo },
   corpo: naoEncontrado({ pt, en }),
-}).replace('<link rel="canonical"', '<meta name="robots" content="noindex">\n  <link rel="canonical"'));
+  indexar: false,
+}));
 await writeFile(join(SAIDA, "sitemap.xml"), sitemap());
 await writeFile(join(SAIDA, "robots.txt"), `User-agent: *\nAllow: /\n\nSitemap: ${site.dominio}/sitemap.xml\n`);
 

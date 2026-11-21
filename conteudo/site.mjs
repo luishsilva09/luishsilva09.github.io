@@ -3,8 +3,8 @@
  */
 export default {
   dominio: "https://devlhs.com.br",
-  // Troque para "contato@devlhs.com.br" quando o Email Routing da Cloudflare estiver ativo.
-  email: "luishsilva09@gmail.com",
+  // Encaminhado pelo Email Routing da Cloudflare.
+  email: "contato@devlhs.com.br",
   // WhatsApp com país e DDD, só números (vira https://wa.me/<número>).
   whatsapp: "5512982047560",
   github: "https://github.com/luishsilva09",

@@ -6,8 +6,8 @@ export default {
   lang: "en",
   base: "/en/",
   meta: {
-    titulo: "Luís Henrique Silva | Full Stack Developer",
-    descricao: "Portfolio of Luís Henrique Silva, full stack developer: projects taken from problem to production with Next.js, Python, PostgreSQL, Docker and CI/CD.",
+    titulo: "Luís Henrique Silva | Full Stack Developer in Brazil",
+    descricao: "Luís Henrique Silva (devlhs), full stack developer in São José dos Campos, Brazil. Web apps and websites from problem to production with Next.js, Python, PostgreSQL, Docker and CI/CD.",
   },
   ui: {
     pular: "Skip to content",
@@ -91,7 +91,7 @@ export default {
     ],
     experienciaTitulo: "Experience",
     experiencia: [
-      { atual: true, quando: "Jun 2025 — present", cargo: "Junior Full Stack Developer", onde: "Nube", itens: [
+      { atual: true, quando: "Jun 2025 — present", cargo: "Full Stack Developer", onde: "Nube", itens: [
         "I build and maintain heavily used internal web modules in Python and Zope.",
         "I write and tune PostgreSQL queries, cutting response times of critical queries.",
         "I refactor legacy systems and business rules in a Scrum team.",
@@ -101,7 +101,7 @@ export default {
         "Run the infrastructure: Docker on a VPS, Nginx with TLS and CSP, Cloudflare, continuous deployment and monitoring.",
       ] },
       { quando: "Jan 2024 — Jun 2025", cargo: "Full Stack Development Intern", onde: "Nube", itens: [
-        "Delivered features from requirements analysis to PostgreSQL modeling. Hired as junior developer.",
+        "Delivered features from requirements analysis to PostgreSQL modeling. Hired as a full-time developer.",
       ] },
       { quando: "Jan 2019 — Jan 2024", cargo: "Specialized Production Operator", onde: "Johnson & Johnson", itens: [
         "From apprentice to specialized operator in a regulated industrial environment with standardized procedures.",
