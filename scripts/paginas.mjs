@@ -26,6 +26,7 @@ const ICONES = {
   automacao: svg('<path d="M13 2L4 14h7l-1 8 9-12h-7z"/>'),
   manutencao: svg('<path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>'),
   seta: svg('<path d="M5 12h14M13 6l6 6-6 6"/>'),
+  conversa: svg('<path d="M21 12a8 8 0 0 1-11.6 7.1L4 20.5l1.4-5.1A8 8 0 1 1 21 12z"/>'),
   voltar: svg('<path d="M19 12H5M11 6l-6 6 6 6"/>'),
   problema: svg('<circle cx="12" cy="12" r="9"/><path d="M12 8v4M12 16h.01"/>'),
   solucao: svg('<circle cx="12" cy="12" r="9"/><path d="M8 12l3 3 5-6"/>'),
@@ -104,7 +105,7 @@ export function layout({ c, site, titulo, descricao, caminho, alternativo, ogIma
 </head>
 <body${classeBody ? ` class="${classeBody}"` : ""}${estiloBody ? ` style="${estiloBody}"` : ""}>
   <a class="pular" href="#conteudo">${esc(c.ui.pular)}</a>
-${cabecalho(c, alternativo)}
+${cabecalho(c, site, alternativo)}
   <main id="conteudo" tabindex="-1">
 ${corpo}
   </main>
@@ -115,7 +116,7 @@ ${corpo}
 `;
 }
 
-function cabecalho(c, alternativo) {
+function cabecalho(c, site, alternativo) {
   const casa = rotaHome(c.lang);
   const n = c.ui.nav, id = c.ui.ids;
   return `  <header class="topo">
@@ -127,8 +128,9 @@ function cabecalho(c, alternativo) {
           <a href="${rotaServicos(c.lang)}">${esc(n.servicos)}</a>
           <a class="opcional" href="${casa}#${id.infra}">${esc(n.infra)}</a>
           <a class="opcional" href="${casa}#${id.experiencia}">${esc(n.experiencia)}</a>
-          <a href="${casa}#${id.contato}">${esc(n.contato)}</a>
+          <a class="opcional" href="${casa}#${id.contato}">${esc(n.contato)}</a>
         </nav>
+        <a class="falar" href="${esc(linkWhats(site, c.ui.mensagemWhats))}" target="_blank" rel="noopener">${ICONES.conversa}<span>${esc(n.falar)}</span></a>
         <a class="idioma" href="${alternativo}" hreflang="${c.lang === "en" ? "pt-BR" : "en"}" lang="${c.lang === "en" ? "pt-BR" : "en"}" aria-label="${esc(c.ui.idioma.aria)}">${esc(c.ui.idioma.rotulo)}</a>
         <button class="tema" type="button" aria-label="${esc(c.ui.temaAria)}">${ICONES.sol}${ICONES.lua}</button>
       </div>
@@ -153,6 +155,10 @@ export function home({ c, site, img }) {
               <span class="tipo">${esc(p.tipo)}</span>
               <h3>${esc(p.nome)}</h3>
               <p class="resumo">${esc(p.resumo)}</p>
+              ${p.caso ? `<dl class="caso">
+                <div><dt>${esc(c.ui.caso.problema)}</dt><dd>${esc(p.caso.problema)}</dd></div>
+                <div><dt>${esc(c.ui.caso.resultado)}</dt><dd>${esc(p.caso.resultado)}</dd></div>
+              </dl>` : ""}
               <div class="meta">
                 <span class="chip status">${esc(p.status)}</span>
                 ${p.stack.slice(0, 3).map((s) => `<span class="chip">${esc(s)}</span>`).join("")}
@@ -172,10 +178,21 @@ export function home({ c, site, img }) {
           <p class="quem">${esc(h.quem)}</p>
           <h1>${esc(h.titulo)}</h1>
           <p class="intro">${esc(h.intro)}</p>
-          <div class="botoes">
-            <a class="btn principal" href="#${id.projetos}">${esc(c.ui.verProjetos)}</a>
-            <a class="btn" href="${rotaServicos(c.lang)}">${esc(c.ui.precisoDe)}</a>
-            <a class="btn" href="${site.curriculo}" download>${esc(c.ui.baixarCV)}</a>
+          <div class="caminhos">
+            <div>
+              <p>${esc(h.caminhos.empresas.rotulo)}</p>
+              <div class="botoes">
+                <a class="btn principal" href="${rotaServicos(c.lang)}">${esc(h.caminhos.empresas.orcamento)}</a>
+                <a class="btn" href="${esc(linkWhats(site, c.ui.mensagemWhats))}" target="_blank" rel="noopener">${esc(h.caminhos.empresas.whats)}</a>
+              </div>
+            </div>
+            <div>
+              <p>${esc(h.caminhos.recrutadores.rotulo)}</p>
+              <div class="botoes">
+                <a class="btn" href="${site.curriculo}" download>${esc(h.caminhos.recrutadores.cv)}</a>
+                <a class="btn" href="#${id.experiencia}">${esc(h.caminhos.recrutadores.experiencia)}</a>
+              </div>
+            </div>
           </div>
         </div>
         <div class="vitrine" aria-hidden="true">
@@ -218,7 +235,13 @@ export function home({ c, site, img }) {
             <p>${esc(x.texto)}</p>
           </div>`).join("\n          ")}
         </div>
-        <p class="servicos-home-cta"><a class="btn principal" href="${rotaServicos(c.lang)}">${esc(h.servicosBotao)}</a></p>
+        <div class="servicos-home-cta">
+          <p>${esc(h.servicosBeneficio)}</p>
+          <div class="botoes">
+            <a class="btn principal" href="${rotaServicos(c.lang)}">${esc(h.servicosBotao)}</a>
+            <a class="btn" href="${esc(linkWhats(site, c.ui.mensagemWhats))}" target="_blank" rel="noopener">${esc(c.ui.chamada.whats)}</a>
+          </div>
+        </div>
       </div>
     </section>
 

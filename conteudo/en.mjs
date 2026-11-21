@@ -7,14 +7,14 @@ export default {
   base: "/en/",
   meta: {
     titulo: "Luís Henrique Silva | Full Stack Developer in Brazil",
-    descricao: "Luís Henrique Silva (devlhs), full stack developer in São José dos Campos, Brazil. Web apps and websites from problem to production with Next.js, Python, PostgreSQL, Docker and CI/CD.",
+    descricao: "Full stack developer in São José dos Campos, Brazil. I build websites and web apps from scratch to production with Next.js, Python, PostgreSQL and Docker.",
   },
   ui: {
     pular: "Skip to content",
     temaAria: "Toggle light and dark theme",
     idioma: { rotulo: "PT", aria: "Ler em português" },
     marcaAria: "devlhs, home page",
-    nav: { projetos: "Projects", servicos: "Services", infra: "Infra", experiencia: "Experience", contato: "Contact" },
+    nav: { projetos: "Projects", servicos: "Services", infra: "Infra", experiencia: "Experience", contato: "Contact", falar: "Let’s talk" },
     ids: { projetos: "projects", infra: "infra", experiencia: "experience", contato: "contact" },
     verProjetos: "See projects",
     precisoDe: "I need a website or system",
@@ -30,6 +30,7 @@ export default {
     baixarCV: "Download résumé (PDF, Portuguese)",
     cvCurto: "Résumé (PDF, PT)",
     verProjeto: "View project",
+    caso: { problema: "Problem", resultado: "Result" },
     todosProjetos: "All projects",
     fichas: { status: "Status", periodo: "Period", papel: "My role" },
     abrir: "Open",
@@ -81,6 +82,11 @@ export default {
     servicosTitulo: "What you can hire me for",
     servicosSub: "If your business needs something like this, I take it from first idea to going live.",
     servicosBotao: "See services and get a quote",
+    servicosBeneficio: "Your site stays online without you worrying about it: I launch it with HTTPS, automatic backups and monitoring that alerts me if anything goes down, before you notice.",
+    caminhos: {
+      empresas: { rotulo: "Hiring for a project?", orcamento: "Get a quote", whats: "WhatsApp" },
+      recrutadores: { rotulo: "Recruiting?", cv: "Résumé (PDF, Portuguese)", experiencia: "Experience and stack" },
+    },
     infraTitulo: "Behind the projects",
     infraSub: "The part you don't see on screen, but that keeps everything running.",
     infra: [
@@ -126,8 +132,8 @@ export default {
   /* /en/services/ page. Same structure and order as "servicos" in pt.mjs. */
   servicos: {
     meta: {
-      titulo: "Custom websites and systems | devlhs, São José dos Campos, Brazil",
-      descricao: "Websites, custom systems, automation and servers for businesses, nonprofits and professionals. Based in São José dos Campos, Brazil, working remotely. Get a quote on WhatsApp.",
+      titulo: "Custom websites and web apps in Brazil | devlhs",
+      descricao: "Websites, custom systems and automation for businesses and nonprofits, with backups and monitoring included. Based in Brazil, working remotely. Get a quote.",
     },
     migalha: "Services",
     quem: "For businesses, nonprofits and professionals, in São José dos Campos or remotely",
@@ -209,7 +215,7 @@ export default {
       ["Conversation", "You describe the problem and I ask questions. No cost and no commitment."],
       ["Proposal", "What will be done, timeline and price, in writing, before we start."],
       ["Build", "You follow along on a test address and give feedback while there is still time to change."],
-      ["Launch", "I put it online with domain, HTTPS and backups set up."],
+      ["Launch", "I put it online with domain, HTTPS, automatic backups and monitoring set up."],
       ["Support", "I stay available for adjustments and, if you want, take care of maintenance."],
     ],
     faqTitulo: "Frequently asked questions",
@@ -235,6 +241,8 @@ export default {
       status: "In production",
       link: { href: "https://www.sussuarana.org.br", rotulo: "sussuarana.org.br" },
       resumo: "The nonprofit's website and the dashboard where the board and treasurer manage volunteers, signed documents, privacy requests and membership dues.",
+      // versão curta do problema e do resultado, para o cartão da home
+      caso: { problema: "The nonprofit had no website and its whole operation ran on spreadsheets and chat messages.", resultado: "Live since 2025: sign-ups, partnerships, minutes and dues in one place, with role-based access." },
       problema: "The nonprofit had no website of its own and everything ran on spreadsheets and messages: volunteer sign-ups, partnership requests, minutes to sign, membership dues. There was no public place to show their work, and no internal place with controlled access for the people running operations.",
       solucao: "An indexable public website with spam-protected forms, and an authenticated dashboard where each person only sees what their role allows. Meeting minutes go out for electronic signature and the status comes back to the dashboard on its own.",
       funcionalidades: [
@@ -279,6 +287,8 @@ export default {
       status: "In daily use",
       link: null,
       resumo: "Monthly balance, credit card, fixed expenses, debts and a net-worth goal in a single mobile-first app.",
+      // versão curta do problema e do resultado, para o cartão da home
+      caso: { problema: "A spreadsheet couldn't handle credit cards or show how much is left for the month.", resultado: "Replaced the spreadsheet and is used daily; a closed card statement never changes." },
       problema: "Tracking money in a spreadsheet works until the credit card gets involved. The statement doesn't close on the same day every month, old purchases get edited and the billed total changes, and there's no single view of what's left this month, what's already committed and whether the net-worth goal is on track.",
       solucao: "A web app you can install on your phone that separates what happened from what's planned, treats the card statement as something you close (and that never changes afterwards), and shows on the home screen how the month compares with the previous one.",
       funcionalidades: [
@@ -323,6 +333,8 @@ export default {
       status: "Phase 5 of development",
       link: null,
       resumo: "Food diary built on Brazil's TACO food table, recipes, weekly meal planning, meal prep, shopping lists, workouts, sleep and weight progress.",
+      // versão curta do problema e do resultado, para o cartão da home
+      caso: { problema: "Diet apps use foreign food databases, hide features behind subscriptions and count missing data as zero.", resultado: "Diary, recipes and weekly planning already work; it's in its fifth development phase." },
       problema: "The best-known diet apps use foreign food databases, hide features behind subscriptions and treat missing data as zero, which makes the daily total look lower than it is. Planning the week, the meal prep and the shopping list lived somewhere else.",
       solucao: "A personal platform with the TACO table (Brazilian foods) imported, barcode lookups through Open Food Facts, and everything that comes after logging: recipes, a planned week, meal prep, shopping, activities and progress over time.",
       funcionalidades: [
@@ -367,6 +379,8 @@ export default {
       status: "In production on my homelab",
       link: null,
       resumo: "Shows what's left to watch and what's airing next for the shows you follow, episode by episode, with no feed and no recommendations.",
+      // versão curta do problema e do resultado, para o cartão da home
+      caso: { problema: "Following many shows at once gets confusing, and existing apps turned into social networks.", resultado: "Running on my homelab, with an automatic daily sync and an alert if it falls behind." },
       problema: "Following several shows at once gets confusing: which episode was I on, when does the next season come back, which ones have ended and can be binged. Existing apps turned into social networks, and manually marking \"watching\" or \"want to watch\" always drifted from what I had actually seen.",
       solucao: "An app that mirrors the TVMaze catalog into its own database, records every episode watched and derives everything else (continue, up to date, finished). A worker syncs what changed once a day, within the API's rate limit.",
       funcionalidades: [
@@ -407,6 +421,8 @@ export default {
       status: "Live",
       link: { href: "https://eletrica.devlhs.com.br", rotulo: "eletrica.devlhs.com.br" },
       resumo: "Ohm's law, resistivity, voltage drop and equivalent resistance with formula, worked example and exercises, plus an editor that simplifies circuits step by step. In Portuguese.",
+      // versão curta do problema e do resultado, para o cartão da home
+      caso: { problema: "A ready-made calculator gives you the number, but doesn't teach you how to get there.", resultado: "Live and open to everyone, with seven content tabs and a circuit simulator." },
       problema: "A ready-made calculator gives you the number but not the path. Studying basic electricity means seeing the formula, understanding each symbol, checking a worked example and, in circuits with many resistors, seeing the order in which they combine until only one is left.",
       solucao: "One page with seven tabs. Each one has the formula, a symbol legend, an explanation, a worked example and exercises with answers before the calculator. In the Circuit tab, you draw resistors on a grid and an animation shows the reduction, with a chalkboard beside it writing out the math.",
       funcionalidades: [
@@ -448,6 +464,8 @@ export default {
       status: "In development",
       link: { href: "https://trippin.devlhs.com.br", rotulo: "trippin.devlhs.com.br" },
       resumo: "A personal, shareable travel calendar: the whole year in one place, with itinerary, planned and actual expenses, a checklist and group agendas.",
+      // versão curta do problema e do resultado, para o cartão da home
+      caso: { problema: "Itinerary, expenses and group plans end up scattered across spreadsheets, notes and chat groups.", resultado: "Public page and sign-in are live; calendar, trips and shared agendas are next." },
       problema: "Trip planning ends up scattered across an expenses spreadsheet, notes with the itinerary, a list of places saved on a map and a chat group with family or friends. Nobody sees the whole year at once, or how much each person has spent.",
       solucao: "A mobile-first app with a year calendar, trips with itinerary, expenses (planned vs actual, per person), a checklist, a list of places I want to visit and shared agendas with owner, editor and reader roles. It is in development: the public page, the design system and the sign-in screens are live; authentication, trips and shared agendas come next.",
       funcionalidades: [

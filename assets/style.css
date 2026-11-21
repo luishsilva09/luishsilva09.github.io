@@ -112,6 +112,21 @@ a:hover { color: var(--accent-hover); }
 .topo nav a:hover { color: var(--accent-hover); }
 .topo .direita { display: flex; align-items: center; gap: clamp(12px, 3vw, 28px); }
 @media (max-width: 560px) { .topo nav .opcional { display: none; } .wordmark { font-size: 19px; } }
+/* "Fale comigo": fica sempre à vista porque o topo é fixo */
+.falar {
+  display: inline-flex; align-items: center; gap: 7px; padding: 8px 14px; border-radius: 10px;
+  font: 600 0.875rem/1 var(--sans); text-decoration: none; white-space: nowrap;
+  background: var(--accent); color: var(--accent-ink); border: 1px solid var(--accent);
+}
+.falar:hover { background: var(--accent-hover); border-color: var(--accent-hover); }
+.falar svg { width: 16px; height: 16px; }
+:root[data-theme="light"] .falar { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+:root[data-theme="light"] .falar:hover { background: var(--accent-hover); border-color: var(--accent-hover); color: #fff; }
+@media (max-width: 420px) {
+  .topo .wrap, .topo .direita { gap: 10px; }
+  .wordmark { display: none; }
+  .falar { padding: 8px 10px; }
+}
 
 .tema {
   display: inline-grid; place-items: center; width: 36px; height: 36px;
@@ -161,6 +176,10 @@ a:hover { color: var(--accent-hover); }
 @media (max-width: 900px) { .hero h1 { font-size: var(--s5); } }
 .hero .intro { margin-top: 24px; font-size: var(--s1); line-height: 1.5; color: var(--ink-2); max-width: 46ch; }
 .hero .botoes { margin-top: 32px; }
+/* dois caminhos: quem contrata e quem recruta */
+.caminhos { margin-top: 32px; display: grid; gap: 20px; }
+.caminhos p { font-size: var(--s-1); font-weight: 600; letter-spacing: .04em; text-transform: uppercase; color: var(--ink-3); margin-bottom: 10px; }
+.hero .caminhos .botoes { margin-top: 0; }
 
 /* vitrine: prints reais em camadas */
 .vitrine { position: relative; aspect-ratio: 1 / .86; }
@@ -258,6 +277,9 @@ a:hover { color: var(--accent-hover); }
 .projeto-linha .tipo { color: var(--p); font-weight: 600; font-size: 0.9375rem; }
 .projeto-linha h3 { font-size: var(--s4); letter-spacing: -0.03em; margin: 6px 0 14px; }
 .projeto-linha .resumo { color: var(--ink-2); font-size: 1.0625rem; }
+.projeto-linha .caso { margin-top: 16px; display: grid; gap: 10px; font-size: .9688rem; }
+.projeto-linha .caso dt { font-size: var(--s-1); font-weight: 600; letter-spacing: .04em; text-transform: uppercase; color: var(--p); }
+.projeto-linha .caso dd { margin: 2px 0 0; color: var(--ink-2); }
 .projeto-linha .meta { margin-top: 20px; display: flex; flex-wrap: wrap; gap: 8px; }
 .chip {
   display: inline-flex; align-items: center; gap: 6px;
@@ -330,7 +352,11 @@ a:hover { color: var(--accent-hover); }
 .servicos-home .ico svg { width: 20px; height: 20px; }
 .servicos-home h3 { font-size: 1.0625rem; }
 .servicos-home p { color: var(--ink-2); font-size: .9688rem; }
-.servicos-home-cta { margin-top: 32px; }
+.servicos-home-cta {
+  margin-top: 32px; padding: 24px; border: 1px solid var(--line); border-radius: var(--r-2);
+  background: var(--surface); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 20px;
+}
+.servicos-home-cta p { flex: 1 1 360px; max-width: 54ch; color: var(--ink-2); }
 /* 5 cartões sem órfão: 2 colunas com o último na largura toda; 3 + 2 centralizado em telas largas */
 @media (min-width: 620px) {
   .servicos-home { grid-template-columns: repeat(6, 1fr); }

@@ -193,7 +193,7 @@ async function gerarIdioma(c, outro) {
   // projetos
   for (const [i, p] of c.projetos.entries()) {
     const prox = c.projetos[(i + 1) % c.projetos.length];
-    const titulo = `${p.nome}: ${p.tipo} | ${c.perfil.nome}`;
+    const titulo = `${p.nome}: ${p.tipo} | devlhs`;
     await escrever(rotaProjeto(c.lang, p.slug), layout({
       c, site, titulo,
       descricao: p.resumo,

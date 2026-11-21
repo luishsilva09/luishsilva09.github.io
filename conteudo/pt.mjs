@@ -13,15 +13,15 @@ export default {
   lang: "pt-BR",
   base: "/",
   meta: {
-    titulo: "Luís Henrique Silva | Desenvolvedor Full Stack em São José dos Campos",
-    descricao: "Luís Henrique Silva (devlhs), desenvolvedor full stack em São José dos Campos, SP. Sites e sistemas web do problema até produção com Next.js, Python, PostgreSQL, Docker e CI/CD.",
+    titulo: "Luís Henrique Silva | Dev Full Stack em São José dos Campos",
+    descricao: "Desenvolvedor full stack em São José dos Campos (SP). Crio sites e sistemas web do zero à produção, com Next.js, Python, PostgreSQL e Docker.",
   },
   ui: {
     pular: "Pular para o conteúdo",
     temaAria: "Alternar tema claro e escuro",
     idioma: { rotulo: "EN", aria: "Read in English" },
     marcaAria: "devlhs, página inicial",
-    nav: { projetos: "Projetos", servicos: "Serviços", infra: "Infra", experiencia: "Experiência", contato: "Contato" },
+    nav: { projetos: "Projetos", servicos: "Serviços", infra: "Infra", experiencia: "Experiência", contato: "Contato", falar: "Fale comigo" },
     ids: { projetos: "projetos", infra: "infra", experiencia: "experiencia", contato: "contato" },
     verProjetos: "Ver projetos",
     precisoDe: "Preciso de um site ou sistema",
@@ -37,6 +37,7 @@ export default {
     baixarCV: "Baixar currículo (PDF)",
     cvCurto: "Currículo (PDF)",
     verProjeto: "Ver o projeto",
+    caso: { problema: "Problema", resultado: "Resultado" },
     todosProjetos: "Todos os projetos",
     fichas: { status: "Status", periodo: "Período", papel: "Meu papel" },
     abrir: "Abrir",
@@ -88,6 +89,11 @@ export default {
     servicosTitulo: "O que você pode contratar",
     servicosSub: "Se você precisa de algo parecido para o seu negócio, eu faço do começo ao fim.",
     servicosBotao: "Ver serviços e pedir orçamento",
+    servicosBeneficio: "Seu site fica no ar sem você se preocupar: publico com HTTPS, backup automático e monitoramento que me avisa se algo cair, antes de você perceber.",
+    caminhos: {
+      empresas: { rotulo: "Quer contratar?", orcamento: "Pedir orçamento", whats: "WhatsApp" },
+      recrutadores: { rotulo: "Está recrutando?", cv: "Currículo (PDF)", experiencia: "Experiência e stack" },
+    },
     infraTitulo: "Por trás dos projetos",
     infraSub: "A parte que não aparece nas telas, mas é o que mantém tudo no ar.",
     infra: [
@@ -136,8 +142,8 @@ export default {
    */
   servicos: {
     meta: {
-      titulo: "Criação de sites e sistemas sob medida em São José dos Campos | devlhs",
-      descricao: "Sites, sistemas sob medida, automações e servidores para empresas, ONGs e profissionais em São José dos Campos e no Vale do Paraíba, ou a distância. Orçamento pelo WhatsApp.",
+      titulo: "Criação de sites e sistemas em São José dos Campos | devlhs",
+      descricao: "Sites, sistemas sob medida e automações para empresas e ONGs em São José dos Campos e no Vale do Paraíba, com backup e monitoramento. Orçamento no WhatsApp.",
     },
     migalha: "Serviços",
     quem: "Para empresas, ONGs e profissionais, em São José dos Campos ou a distância",
@@ -219,7 +225,7 @@ export default {
       ["Conversa", "Você conta o problema e eu faço perguntas. Sem custo e sem compromisso."],
       ["Proposta", "O que será feito, prazo e valor, por escrito, antes de começar."],
       ["Construção", "Você acompanha num endereço de teste e opina enquanto ainda dá tempo de mudar."],
-      ["Publicação", "Coloco no ar com domínio, HTTPS e backup configurados."],
+      ["Publicação", "Coloco no ar com domínio, HTTPS, backup automático e monitoramento configurados."],
       ["Suporte", "Fico disponível para ajustes e, se quiser, cuido da manutenção."],
     ],
     faqTitulo: "Perguntas frequentes",
@@ -248,6 +254,8 @@ export default {
         rotulo: "sussuarana.org.br"
       },
       resumo: "Site da ONG e o painel onde diretoria e financeiro cuidam de voluntários, documentos assinados, LGPD e mensalidades.",
+      // versão curta do problema e do resultado, para o cartão da home
+      caso: { problema: "A ONG não tinha site e a operação inteira andava em planilha e mensagem.", resultado: "No ar desde 2025: inscrições, parcerias, atas e mensalidades num só lugar, com acesso por função." },
       problema: "A ONG não tinha site próprio e tudo andava em planilha e mensagem: inscrição de voluntário, pedido de parceria, ata para assinar, mensalidade de associado. Não havia um lugar público para mostrar o trabalho, nem um lugar interno com acesso controlado para quem cuida da operação.",
       solucao: "Um site público indexável, com formulários protegidos contra spam, e um painel autenticado em que cada pessoa vê só o que a função dela permite. As atas são enviadas para assinatura eletrônica e o status volta sozinho para o painel.",
       funcionalidades: [
@@ -399,6 +407,8 @@ export default {
       status: "Em uso diário",
       link: null,
       resumo: "Saldo do mês, cartão de crédito, gastos fixos, dívidas e meta de patrimônio num app só, feito para o celular.",
+      // versão curta do problema e do resultado, para o cartão da home
+      caso: { problema: "A planilha não dava conta do cartão de crédito nem mostrava quanto sobra no mês.", resultado: "Substituiu a planilha e é usado todo dia; fatura fechada não muda mais." },
       problema: "Controlar dinheiro em planilha funciona até o cartão de crédito entrar na conta. A fatura não fecha no mesmo dia todo mês, compras antigas são editadas e o total cobrado muda, e não dá para ver de uma vez quanto sobra no mês, quanto já está comprometido e se a meta de patrimônio está no caminho.",
       solucao: "Um app web instalável no celular que separa o realizado do previsto, trata a fatura do cartão como algo que você fecha (e que depois disso não muda mais) e mostra, na tela inicial, como o mês está indo em relação ao anterior.",
       funcionalidades: [
@@ -544,6 +554,8 @@ export default {
       status: "Fase 5 de desenvolvimento",
       link: null,
       resumo: "Diário alimentar com a tabela TACO, receitas, planejamento da semana, marmitas, lista de compras, treinos, sono e evolução do peso.",
+      // versão curta do problema e do resultado, para o cartão da home
+      caso: { problema: "Apps de dieta usam alimentos estrangeiros, cobram assinatura e contam dado faltante como zero.", resultado: "Diário, receitas e planejamento da semana já funcionam; está na fase 5 de desenvolvimento." },
       problema: "Os apps de dieta mais conhecidos usam bases de alimentos estrangeiras, escondem funções atrás de assinatura e tratam dado faltante como zero, o que deixa o total do dia menor do que é. Planejar a semana, as marmitas e a lista de compras ficava em outros lugares.",
       solucao: "Uma plataforma pessoal com a tabela TACO (alimentos brasileiros) importada, produtos por código de barras via Open Food Facts e tudo o que vem depois do registro: receitas, semana planejada, marmitas, compras, atividades e a evolução ao longo do tempo.",
       funcionalidades: [
@@ -692,6 +704,8 @@ export default {
       status: "Em produção no homelab",
       link: null,
       resumo: "Mostra o que falta assistir e o que estreia nas séries que você acompanha, episódio por episódio, sem feed nem recomendação.",
+      // versão curta do problema e do resultado, para o cartão da home
+      caso: { problema: "Acompanhar várias séries vira confusão, e os apps existentes viraram rede social.", resultado: "Rodando no homelab, com sincronização diária automática e alerta se ela atrasar." },
       problema: "Acompanhar várias séries ao mesmo tempo vira confusão: em que episódio parei, quando volta a próxima temporada, o que já terminou e dá para maratonar. Os apps existentes viraram rede social, e marcar manualmente \"assistindo\" ou \"quero ver\" sempre divergia do que eu tinha visto de fato.",
       solucao: "Um app que copia o catálogo da TVMaze para o próprio banco, registra cada episódio visto e deriva todo o resto (continuar, em dia, concluída). Um worker sincroniza o que mudou uma vez por dia, respeitando o limite da API.",
       funcionalidades: [
@@ -822,6 +836,8 @@ export default {
       status: "No ar",
       link: { href: "https://eletrica.devlhs.com.br", rotulo: "eletrica.devlhs.com.br" },
       resumo: "Lei de Ohm, resistividade, queda de tensão e resistência equivalente com fórmula, exemplo e exercícios, e um editor que simplifica circuitos passo a passo.",
+      // versão curta do problema e do resultado, para o cartão da home
+      caso: { problema: "Calculadora pronta dá o número, mas não ensina o caminho até ele.", resultado: "No ar e aberto a todos, com sete abas de conteúdo e um simulador de circuitos." },
       problema: "Calculadora pronta dá o número, mas não mostra o caminho. Para estudar eletricidade básica é preciso ver a fórmula, entender cada símbolo, conferir um exemplo resolvido e, em circuitos com vários resistores, enxergar em que ordem eles se juntam até sobrar um só.",
       solucao: "Uma página com sete abas. Cada uma traz fórmula, legenda dos símbolos, explicação, exemplo resolvido e exercícios com resposta antes da calculadora. Na aba Circuito, você desenha os resistores numa grade e uma animação mostra a redução, com uma lousa ao lado escrevendo as contas.",
       funcionalidades: [
@@ -863,6 +879,8 @@ export default {
       status: "Em desenvolvimento",
       link: { href: "https://trippin.devlhs.com.br", rotulo: "trippin.devlhs.com.br" },
       resumo: "Calendário de viagens pessoal e compartilhável: o ano inteiro num só lugar, com roteiro, gastos planejados e reais, checklist e agendas em grupo.",
+      // versão curta do problema e do resultado, para o cartão da home
+      caso: { problema: "Roteiro, gastos e combinados da viagem ficam espalhados entre planilha, notas e grupo de mensagens.", resultado: "Página pública e acesso no ar; calendário, trips e agendas em grupo são as próximas etapas." },
       problema: "Planejar viagens fica espalhado entre planilha de gastos, notas com o roteiro, lista de lugares salvos no mapa e um grupo de mensagens com a família ou os amigos. Ninguém enxerga o ano de uma vez, nem quanto já foi gasto por pessoa.",
       solucao: "Um app pensado para o celular, com calendário do ano, trips com roteiro, gastos (planejado contra real, por pessoa), checklist, lista de lugares que quero visitar e agendas compartilhadas com papéis de dono, editor e leitor. Está em desenvolvimento: a página pública, o design system e as telas de acesso já estão no ar; autenticação, trips e agendas compartilhadas são as próximas etapas.",
       funcionalidades: [
