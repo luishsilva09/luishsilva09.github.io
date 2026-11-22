@@ -405,7 +405,7 @@ export default {
       ano: "2025 — atual",
       papel: "Projeto pessoal, do modelo de dados ao deploy no homelab.",
       status: "Em uso diário",
-      link: null,
+      link: { href: "https://coin.devlhs.com.br/sobre", rotulo: "coin.devlhs.com.br" },
       resumo: "Saldo do mês, cartão de crédito, gastos fixos, dívidas e meta de patrimônio num app só, feito para o celular.",
       // versão curta do problema e do resultado, para o cartão da home
       caso: { problema: "A planilha não dava conta do cartão de crédito nem mostrava quanto sobra no mês.", resultado: "Substituiu a planilha e é usado todo dia; fatura fechada não muda mais." },

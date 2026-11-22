@@ -285,7 +285,7 @@ export default {
       ano: "2025 — present",
       papel: "Personal project, from data model to deployment on my homelab.",
       status: "In daily use",
-      link: null,
+      link: { href: "https://coin.devlhs.com.br/sobre", rotulo: "coin.devlhs.com.br" },
       resumo: "Monthly balance, credit card, fixed expenses, debts and a net-worth goal in a single mobile-first app.",
       // versão curta do problema e do resultado, para o cartão da home
       caso: { problema: "A spreadsheet couldn't handle credit cards or show how much is left for the month.", resultado: "Replaced the spreadsheet and is used daily; a closed card statement never changes." },
